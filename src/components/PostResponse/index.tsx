@@ -4,14 +4,14 @@ import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 interface PostResponseProps {
     title: string
     message: string
-    username?: string
+    username: string
     date: string
 }
 
 export const PostResponse = ({
     title,
     message,
-    username = 'yuuhrizin',
+    username,
     date,
 }: PostResponseProps) => {
     return (

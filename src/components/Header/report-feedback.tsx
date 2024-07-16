@@ -10,7 +10,7 @@ export const HeaderReportFeedback = () => {
     }
 
     const goHome = () => {
-        navigate('/')
+        navigate('/home')
     }
 
     return (

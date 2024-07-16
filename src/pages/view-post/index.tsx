@@ -1,6 +1,7 @@
 import { ViewPostContent } from '@/components/Cards/view-post-content'
 import { ErrorNotFoundPost } from '@/components/Error'
 import { FeedbackDialogForm, ReportDialogForm } from '@/components/Form'
+import { CommentForm } from '@/components/Form/comment-form'
 import { ViewPostHeader } from '@/components/Header'
 import { LoadingSpinner } from '@/components/Loading'
 import { useReportPostData } from '@/hooks/usePostData'
@@ -36,6 +37,9 @@ export const ViewPost = () => {
                     date={dayjs(data.createdAt).format('DD/MM/YYYY - HH:mm')}
                     status={data.status}
                 />
+            </div>
+            <div className="flex justify-center">
+                <CommentForm />
             </div>
         </>
     )
