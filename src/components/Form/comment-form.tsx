@@ -1,10 +1,17 @@
+import { useCommentMutate } from '@/hooks/usePostMutate'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Label } from '@radix-ui/react-dropdown-menu'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { StatusSelect } from '../Select'
 import { Button } from '../ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '../ui/card'
 import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
 
@@ -18,10 +25,15 @@ const commentSchema = z.object({
         .string()
         .min(30, 'The comment must be at least 30 characters.')
         .max(255, 'The comment must be at most 255 characters.'),
-    status: z.string(),
+    status: z.string().optional(),
 })
 
-export const CommentForm = () => {
+interface CommentFormProps {
+    postId: string
+}
+
+export const CommentForm = ({ postId }: CommentFormProps) => {
+    const { createMutation } = useCommentMutate()
     const form = useForm<z.infer<typeof commentSchema>>({
         resolver: zodResolver(commentSchema),
         defaultValues: {
@@ -32,7 +44,18 @@ export const CommentForm = () => {
     })
 
     const onSubmit = (data: z.infer<typeof commentSchema>) => {
-        console.log(data)
+        const { title, content, authorName, status } = data
+        const commentData = {
+            comment: {
+                commentTitle: title,
+                content,
+                authorName,
+                reportFeedbackId: postId,
+            },
+            ...(status && { status }),
+        }
+
+        createMutation.mutate(commentData)
     }
 
     return (
@@ -40,6 +63,9 @@ export const CommentForm = () => {
             <Card className="w-[850px] h-auto">
                 <CardHeader className="flex-grow">
                     <CardTitle className="mb-1">Comment Form</CardTitle>
+                    <CardDescription>
+                        Make a comment on post and update post status.
+                    </CardDescription>
                 </CardHeader>
                 <CardContent className="-mt-2">
                     <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -84,6 +110,7 @@ export const CommentForm = () => {
                                 <Controller
                                     control={form.control}
                                     name="status"
+                                    defaultValue=""
                                     render={({ field }) => (
                                         <StatusSelect {...field} />
                                     )}

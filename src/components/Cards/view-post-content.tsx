@@ -23,7 +23,7 @@ export const ViewPostContent = ({
     status,
 }: ViewPostProps) => {
     return (
-        <div className="flex justify-center mb-3 mt-28">
+        <div className="flex justify-center mb-3 mt-16">
             <Card className="w-[850px] h-auto">
                 <CardHeader className="flex-grow">
                     <CardTitle className="mb-1">{title}</CardTitle>
@@ -36,7 +36,9 @@ export const ViewPostContent = ({
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="-mt-2">
-                    <div className="mt-4">{content}</div>
+                    <div className="mt-4 break-words whitespace-pre-wrap">
+                        {content}
+                    </div>
                 </CardContent>
             </Card>
         </div>

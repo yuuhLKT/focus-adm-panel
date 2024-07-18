@@ -20,7 +20,7 @@ interface SendFormProps {
 export const SendForm = ({ type, handleClose }: SendFormProps) => {
     const navigate = useNavigate()
     const { toast } = useToast()
-    const { mutate } = useFormMutate()
+    const { createMutation } = useFormMutate()
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -32,7 +32,7 @@ export const SendForm = ({ type, handleClose }: SendFormProps) => {
     })
 
     function onSubmit(data: z.infer<typeof formSchema>) {
-        mutate(data, {
+        createMutation.mutate(data, {
             onSuccess: (response) => {
                 toast({
                     variant: 'success',
@@ -54,7 +54,7 @@ export const SendForm = ({ type, handleClose }: SendFormProps) => {
                 toast({
                     variant: 'error',
                     title: 'Ops, something went wrong.',
-                    description: 'Please try again later. CODE: ',
+                    description: 'Please try again later.',
                     action: (
                         <ToastAction altText="Close the toast.">
                             Close

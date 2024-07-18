@@ -23,6 +23,7 @@ export function StatusSelect({ onChange, value }: StatusSelectProps) {
             <SelectContent className="text-center">
                 <SelectGroup>
                     <SelectLabel>Status</SelectLabel>
+                    <SelectItem value="no-change">DON'T CHANGE</SelectItem>
                     <SelectItem value="open">
                         <StatusBadge status="OPEN" />
                     </SelectItem>

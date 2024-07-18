@@ -1,4 +1,6 @@
+import { Trash2 } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
+import { Button } from '../ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 
 interface PostResponseProps {
@@ -6,6 +8,7 @@ interface PostResponseProps {
     message: string
     username: string
     date: string
+    onDelete: () => void
 }
 
 export const PostResponse = ({
@@ -13,6 +16,7 @@ export const PostResponse = ({
     message,
     username,
     date,
+    onDelete,
 }: PostResponseProps) => {
     return (
         <div className="flex justify-center mb-3 mt-12">
@@ -26,7 +30,9 @@ export const PostResponse = ({
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div>{message}</div>
+                        <div className="break-words whitespace-pre-wrap">
+                            {message}
+                        </div>
                         <div className="text-center flex flex-col justify-center items-center">
                             <Avatar className="mt-6">
                                 <AvatarImage src="https://i.pinimg.com/736x/94/99/d3/9499d329de7f73295a0254a76dcc758a.jpg" />
@@ -36,6 +42,13 @@ export const PostResponse = ({
                             <span className="text-xs text-gray-500">
                                 {date}
                             </span>
+                            <Button
+                                className="mt-5"
+                                variant="destructive"
+                                onClick={onDelete}
+                            >
+                                <Trash2 size={16} />
+                            </Button>
                         </div>
                     </CardContent>
                 </div>
