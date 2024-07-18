@@ -1,5 +1,3 @@
-import { useFormMutate } from '@/hooks/useFormMutate'
-import { Trash2 } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { ChangeStatus } from '../Select/select-dialog'
 import { StatusBadge } from '../Status'
@@ -11,7 +9,7 @@ import {
     CardHeader,
     CardTitle,
 } from '../ui/card'
-import { useToast } from '../ui/use-toast'
+import { DeleteDialog } from '../Dialogs'
 
 interface MessageCardProps {
     id: string
@@ -31,30 +29,9 @@ export const MessageCard = ({
     status,
 }: MessageCardProps) => {
     const navigate = useNavigate()
-    const { deleteMutation } = useFormMutate()
-    const { toast } = useToast()
 
     const goToPost = () => {
         navigate(`/post/${id}`)
-    }
-
-    const handleDelete = () => {
-        deleteMutation.mutate(id, {
-            onSuccess: () => {
-                toast({
-                    variant: 'success',
-                    title: 'Deleted with success.',
-                    description: 'The post was removed.',
-                })
-            },
-            onError: () => {
-                toast({
-                    variant: 'error',
-                    title: 'Ops, something went wrong.',
-                    description: 'Please try again later.',
-                })
-            },
-        })
     }
 
     return (
@@ -73,14 +50,8 @@ export const MessageCard = ({
                 <CardContent className="-mt-2">
                     <div className="truncate">{content}</div>
                     <div className="flex justify-end mt-3">
-                        <Button
-                            className="mr-2"
-                            variant="destructive"
-                            onClick={handleDelete}
-                        >
-                            <Trash2 size={16} />
-                        </Button>
                         <ChangeStatus id={id} />
+                        <DeleteDialog id={id} />
                         <Button onClick={goToPost}>See more</Button>
                     </div>
                 </CardContent>
