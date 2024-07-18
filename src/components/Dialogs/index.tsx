@@ -29,6 +29,7 @@ export const DeleteDialog = ({ id }: DeleteDialogProps) => {
                     title: 'Deleted with success.',
                     description: 'The post was removed.',
                 })
+                setIsOpen(false)
             },
             onError: () => {
                 toast({
@@ -36,6 +37,7 @@ export const DeleteDialog = ({ id }: DeleteDialogProps) => {
                     title: 'Ops, something went wrong.',
                     description: 'Please try again later.',
                 })
+                setIsOpen(false)
             },
         })
     }
