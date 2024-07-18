@@ -1,6 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import axios from "axios"
 
+const apiUrl = import.meta.env.VITE_API_URL
+
 const headers = {
     'Content-Type': 'application/json',
     'authorization': import.meta.env.VITE_HEADER_AUTHORIZATION
@@ -17,12 +19,12 @@ interface CommentData {
 }
 
 const postCommentData = async (data: CommentData) => {
-    const response = await axios.post('http://localhost:3001/admin/comments', data, { headers })
+    const response = await axios.post(`${apiUrl}/admin/comments`, data, { headers })
     return response.data
 }
 
 const deleteCommentData = async (id: string) => {
-    const response = await axios.delete(`http://localhost:3001/admin/comments/${id}`, { headers })
+    const response = await axios.delete(`${apiUrl}/admin/comments/${id}`, { headers })
     return response.data
 }
 

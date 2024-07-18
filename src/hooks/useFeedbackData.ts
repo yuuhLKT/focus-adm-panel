@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
+const apiUrl = import.meta.env.VITE_API_URL
+
 const fetchFeedbackData = async () => {
-    const response = await axios.get('http://localhost:3001/report-feedback/?type=feedback')
+    const response = await axios.get(`${apiUrl}/report-feedback/?type=feedback`)
     return response.data
 }
 
