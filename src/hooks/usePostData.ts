@@ -12,6 +12,6 @@ export function useReportPostData(postID: string) {
     return useQuery({
         queryKey: ['post', postID],
         queryFn: () => fetchPostData(postID),
-        retry: 2,
+        retry: false,
     })
 }

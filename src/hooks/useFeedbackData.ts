@@ -12,6 +12,6 @@ export function useFeedbackData() {
     return useQuery({
         queryFn: fetchFeedbackData,
         queryKey: ['feedbackData'],
-        retry: 2,
+        retry: false,
     })
 }

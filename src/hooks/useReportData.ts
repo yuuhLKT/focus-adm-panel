@@ -12,6 +12,6 @@ export function useReportData() {
     return useQuery({
         queryFn: fetchReportData,
         queryKey: ['reportData'],
-        retry: 2,
+        retry: false,
     })
 }

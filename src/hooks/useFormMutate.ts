@@ -33,6 +33,7 @@ export function useFormMutate() {
             queryClient.invalidateQueries({ queryKey: ['reportData'] })
             queryClient.invalidateQueries({ queryKey: ['feedbackData'] })
         },
+        retry: false,
     })
 
     const deleteMutation = useMutation({
@@ -41,6 +42,7 @@ export function useFormMutate() {
             queryClient.invalidateQueries({ queryKey: ['reportData'] })
             queryClient.invalidateQueries({ queryKey: ['feedbackData'] })
         },
+        retry: false,
     })
 
     const updateStatusMutation = useMutation({
@@ -48,7 +50,8 @@ export function useFormMutate() {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['reportData'] })
             queryClient.invalidateQueries({ queryKey: ['feedbackData'] })
-        }
+        },
+        retry: false,
     })
 
     return { createMutation, deleteMutation, updateStatusMutation }

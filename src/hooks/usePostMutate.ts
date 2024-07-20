@@ -36,6 +36,7 @@ export function useCommentMutate() {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['postComments'] })
         },
+        retry: false,
     })
 
     const deleteMutation = useMutation({
@@ -43,6 +44,7 @@ export function useCommentMutate() {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['postComments'] })
         },
+        retry: false,
     })
 
     return { createMutation, deleteMutation }

@@ -12,6 +12,6 @@ export const usePostComments = (postId: string) => {
     return useQuery({
         queryKey: ['postComments', postId],
         queryFn: () => fetchComments(postId),
-        retry: 1,
+        retry: false,
     })
 }
